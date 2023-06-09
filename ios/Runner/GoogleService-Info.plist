@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>135642738745-ni8mh0ec4tvane6avsan908nk7gihsr3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.135642738745-ni8mh0ec4tvane6avsan908nk7gihsr3</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>135642738745-70sefeppo8ds1rep5ck6firgpc15fdaa.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC3ghpUnkHkMOedhIWHKgHBEd_HHF7dxTI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>135642738745</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.danielprazeres.refugio</string>
+	<key>PROJECT_ID</key>
+	<string>refugio-167f7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>refugio-167f7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:135642738745:ios:49d6634890b2d8fda2dde8</string>
+</dict>
+</plist>

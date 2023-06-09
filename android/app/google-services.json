@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "135642738745",
+    "project_id": "refugio-167f7",
+    "storage_bucket": "refugio-167f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135642738745:android:02b8b312e3d578fca2dde8",
+        "android_client_info": {
+          "package_name": "com.danielprazeres.refugio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135642738745-70sefeppo8ds1rep5ck6firgpc15fdaa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.danielprazeres.refugio",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "135642738745-ats8kfj0et5i77dgi9qkv6nbmm6bsnk7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_DYS_AkCCt8hu4SV86-XGWiwoQUmth6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135642738745-ats8kfj0et5i77dgi9qkv6nbmm6bsnk7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "135642738745-ni8mh0ec4tvane6avsan908nk7gihsr3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.danielprazeres.refugio"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
