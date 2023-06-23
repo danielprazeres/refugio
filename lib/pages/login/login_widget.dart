@@ -1,9 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -525,9 +527,43 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             return;
                                                           }
 
-                                                          context.goNamedAuth(
-                                                              'home',
-                                                              context.mounted);
+                                                          await UserProfileRecord
+                                                              .collection
+                                                              .doc()
+                                                              .set(
+                                                                  createUserProfileRecordData(
+                                                                userProfile:
+                                                                    currentUserUid,
+                                                              ));
+
+                                                          await ContatoEmergenciaRecord
+                                                              .collection
+                                                              .doc()
+                                                              .set(
+                                                                  createContatoEmergenciaRecordData(
+                                                                contatoVinculoUsuario:
+                                                                    currentUserUid,
+                                                                bitCadastro:
+                                                                    true,
+                                                              ));
+
+                                                          context.pushNamedAuth(
+                                                            'profile',
+                                                            context.mounted,
+                                                            queryParameters: {
+                                                              'uid':
+                                                                  serializeParam(
+                                                                currentUserUid,
+                                                                ParamType
+                                                                    .String,
+                                                              ),
+                                                              'bitUpdate':
+                                                                  serializeParam(
+                                                                false,
+                                                                ParamType.bool,
+                                                              ),
+                                                            }.withoutNulls,
+                                                          );
                                                         },
                                                         text: 'Registrar',
                                                         options:
@@ -656,7 +692,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   }
 
                                                                   context.goNamedAuth(
-                                                                      'home',
+                                                                      'Login',
                                                                       context
                                                                           .mounted);
                                                                 },
@@ -718,83 +754,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 ),
                                                               ),
                                                             ),
-                                                            isAndroid
-                                                                ? Container()
-                                                                : Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            16.0),
-                                                                    child:
-                                                                        FFButtonWidget(
-                                                                      onPressed:
-                                                                          () async {
-                                                                        GoRouter.of(context)
-                                                                            .prepareAuthEvent();
-                                                                        final user =
-                                                                            await authManager.signInWithApple(context);
-                                                                        if (user ==
-                                                                            null) {
-                                                                          return;
-                                                                        }
-
-                                                                        context.goNamedAuth(
-                                                                            'home',
-                                                                            context.mounted);
-                                                                      },
-                                                                      text:
-                                                                          'Continuar com o celular',
-                                                                      icon:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .phone,
-                                                                        size:
-                                                                            20.0,
-                                                                      ),
-                                                                      options:
-                                                                          FFButtonOptions(
-                                                                        width:
-                                                                            230.0,
-                                                                        height:
-                                                                            44.0,
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
-                                                                        textStyle: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                              color: FlutterFlowTheme.of(context).chryslerBlue,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                            ),
-                                                                        elevation:
-                                                                            0.0,
-                                                                        borderSide:
-                                                                            BorderSide(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).alternate,
-                                                                          width:
-                                                                              2.0,
-                                                                        ),
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(40.0),
-                                                                        hoverColor:
-                                                                            FlutterFlowTheme.of(context).primaryBackground,
-                                                                      ),
-                                                                    ),
-                                                                  ),
                                                           ],
                                                         ),
                                                       ),
@@ -1092,9 +1051,18 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             return;
                                                           }
 
-                                                          context.goNamedAuth(
-                                                              'home',
-                                                              context.mounted);
+                                                          context.pushNamedAuth(
+                                                            'home',
+                                                            context.mounted,
+                                                            queryParameters: {
+                                                              'uid':
+                                                                  serializeParam(
+                                                                currentUserUid,
+                                                                ParamType
+                                                                    .String,
+                                                              ),
+                                                            }.withoutNulls,
+                                                          );
                                                         },
                                                         text: 'Login',
                                                         options:
@@ -1216,7 +1184,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               }
 
                                                               context.goNamedAuth(
-                                                                  'home',
+                                                                  'Login',
                                                                   context
                                                                       .mounted);
                                                             },
@@ -1298,19 +1266,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   16.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          GoRouter.of(context)
-                                                              .prepareAuthEvent();
-                                                          final user =
-                                                              await authManager
-                                                                  .signInWithGoogle(
-                                                                      context);
-                                                          if (user == null) {
-                                                            return;
-                                                          }
-
-                                                          context.goNamedAuth(
-                                                              'home',
-                                                              context.mounted);
+                                                          context.pushNamed(
+                                                              'forgotpassword');
                                                         },
                                                         text:
                                                             'Esqueceu a senha?',

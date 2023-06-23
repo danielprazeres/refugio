@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow_theme.dart';
 import '/backend/backend.dart';
 
@@ -52,10 +53,13 @@ class AppStateNotifier extends ChangeNotifier {
   void updateNotifyOnAuthChange(bool notify) => notifyOnAuthChange = notify;
 
   void update(BaseAuthUser newUser) {
+    final shouldUpdate =
+        user?.uid == null || newUser.uid == null || user?.uid != newUser.uid;
     initialUser ??= newUser;
     user = newUser;
     // Refresh the app on auth change unless explicitly marked otherwise.
-    if (notifyOnAuthChange) {
+    // No need to update unless the user has changed.
+    if (notifyOnAuthChange && shouldUpdate) {
       notifyListeners();
     }
     // Once again mark the notifier as needing to update on auth change
@@ -74,13 +78,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomeWidget() : GetstartedWidget(),
+          appStateNotifier.loggedIn ? LoginWidget() : GetstartedWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomeWidget() : GetstartedWidget(),
+              appStateNotifier.loggedIn ? LoginWidget() : GetstartedWidget(),
         ),
         FFRoute(
           name: 'Login',
@@ -90,22 +94,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'profile',
           path: '/profile',
-          builder: (context, params) => ProfileWidget(),
-        ),
-        FFRoute(
-          name: 'home',
-          path: '/home',
-          builder: (context, params) => HomeWidget(),
-        ),
-        FFRoute(
-          name: 'home2',
-          path: '/home2',
-          builder: (context, params) => Home2Widget(),
-        ),
-        FFRoute(
-          name: 'Profile09',
-          path: '/profile09',
-          builder: (context, params) => Profile09Widget(),
+          builder: (context, params) => ProfileWidget(
+            uid: params.getParam('uid', ParamType.String),
+            bitUpdate: params.getParam('bitUpdate', ParamType.bool),
+          ),
         ),
         FFRoute(
           name: 'getstarted',
@@ -113,11 +105,52 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => GetstartedWidget(),
         ),
         FFRoute(
-          name: 'Home13Productivity',
-          path: '/home13Productivity',
-          builder: (context, params) => Home13ProductivityWidget(),
+          name: 'Abrigos',
+          path: '/abrigos',
+          builder: (context, params) => AbrigosWidget(
+            places: params.getParam<LatLng>('places', ParamType.LatLng, true),
+            uid: params.getParam('uid', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'chat',
+          path: '/chat',
+          asyncParams: {
+            'chatUser': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => ChatWidget(
+            chatUser: params.getParam('chatUser', ParamType.Document),
+            chatRef: params.getParam(
+                'chatRef', ParamType.DocumentReference, false, ['chats']),
+          ),
+        ),
+        FFRoute(
+          name: 'home',
+          path: '/home',
+          builder: (context, params) => HomeWidget(
+            uid: params.getParam('uid', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'ContatoEmergencia',
+          path: '/contatoEmergencia',
+          builder: (context, params) => ContatoEmergenciaWidget(
+            uid: params.getParam('uid', ParamType.String),
+            bitCadastro: params.getParam('bitCadastro', ParamType.bool),
+          ),
+        ),
+        FFRoute(
+          name: 'Video',
+          path: '/video',
+          builder: (context, params) => VideoWidget(),
+        ),
+        FFRoute(
+          name: 'forgotpassword',
+          path: '/forgotpassword',
+          builder: (context, params) => ForgotpasswordWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {

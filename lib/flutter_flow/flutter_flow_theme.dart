@@ -70,6 +70,7 @@ abstract class FlutterFlowTheme {
   late Color slateBlue;
   late Color primaryBtnText;
   late Color lineColor;
+  late Color customColor1;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -181,6 +182,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color slateBlue = Color(0xFF7750D4);
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color lineColor = Color(0xFFE0E3E7);
+  late Color customColor1 = Color(0xFF2FB73C);
 }
 
 abstract class Typography {
@@ -260,8 +262,8 @@ class MobileTypography extends Typography {
   TextStyle get headlineSmall => GoogleFonts.getFont(
         'Outfit',
         color: theme.primaryText,
-        fontWeight: FontWeight.w500,
-        fontSize: 24.0,
+        fontWeight: FontWeight.normal,
+        fontSize: 18.0,
       );
   String get titleLargeFamily => 'Outfit';
   TextStyle get titleLarge => GoogleFonts.getFont(
@@ -584,6 +586,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color slateBlue = Color(0xFF7750D4);
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color lineColor = Color(0xFF22282F);
+  late Color customColor1 = Color(0xFF452FB7);
 }
 
 extension TextStyleHelper on TextStyle {
